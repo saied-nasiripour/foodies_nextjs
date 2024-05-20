@@ -6,7 +6,7 @@ import Image from "next/image";
 
 function ImagePicker({label, name}) {
 
-    const [pickedImage, setPickedImage] = useState(null);
+    const [pickedImage, setPickedImage] = useState();
     const imageInput = useRef();
 
     function handlePickClick() {
@@ -16,6 +16,7 @@ function ImagePicker({label, name}) {
     function handleImageChange(event) {
         const file = event.target.files[0];
         if (!file) {
+            setPickedImage(null);
             return;
         }
         const fileReader = new FileReader();
@@ -56,6 +57,7 @@ function ImagePicker({label, name}) {
                     name={name}
                     ref={imageInput}
                     onChange={handleImageChange}
+                    required
                 />
                 <button
                     className={classes.button}
